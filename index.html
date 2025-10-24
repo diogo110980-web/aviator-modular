@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 Aviator Modular - Análise Inteligente</title>
+    <title>🚀 Aviator Modular v17 - Análise Inteligente</title>
     <style>
         * {
             margin: 0;
@@ -13,284 +13,563 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
             padding: 20px;
-            color: #333;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            padding: 40px;
         }
         
         header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
         
         h1 {
             font-size: 2.5em;
-            color: #667eea;
             margin-bottom: 10px;
         }
         
         .subtitle {
-            font-size: 1.2em;
-            color: #666;
-            font-weight: 300;
+            font-size: 1.1em;
+            opacity: 0.9;
         }
         
-        .status {
-            background: #f0f7ff;
-            border-left: 4px solid #4CAF50;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
+        .input-section {
+            background: #0f3460;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #667eea;
         }
         
-        .status-title {
-            font-weight: bold;
-            color: #4CAF50;
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
             margin-bottom: 10px;
+            font-weight: bold;
+            color: #667eea;
         }
         
-        .modules-grid {
+        textarea, input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        textarea:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 10px rgba(118, 75, 162, 0.5);
+        }
+        
+        .range-inputs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin: 30px 0;
         }
         
-        .module-card {
+        button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .module-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
-        }
-        
-        .module-title {
-            font-size: 1.3em;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1em;
             font-weight: bold;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
         }
         
-        .module-desc {
-            font-size: 0.95em;
-            opacity: 0.9;
-            line-height: 1.6;
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
         
-        .stats {
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 30px 0;
-            background: #f9f9f9;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: #0f3460;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .detector {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .probability-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+        
+        .status-high {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .status-medium {
+            background: #FFC107;
+            color: #333;
+        }
+        
+        .status-low {
+            background: #f44336;
+            color: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 5px;
+            margin: 20px 0;
+        }
+        
+        .heatmap-cell {
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .heatmap-cell:hover {
+            transform: scale(1.1);
+        }
+        
+        .cold { background: #2196F3; }
+        .neutral { background: #FFC107; color: #333; }
+        .hot { background: #F44336; }
+        .extreme { background: #9C27B0; }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
         }
         
         .stat-box {
-            text-align: center;
+            background: rgba(102, 126, 234, 0.1);
             padding: 15px;
-            background: white;
             border-radius: 8px;
-            border: 2px solid #e0e0e0;
-        }
-        
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #667eea;
+            border: 1px solid #667eea;
         }
         
         .stat-label {
-            color: #666;
-            margin-top: 5px;
+            color: #999;
             font-size: 0.9em;
         }
         
-        .features {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 30px 0;
-        }
-        
-        .features h2 {
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
             color: #667eea;
-            margin-bottom: 15px;
+            margin-top: 5px;
         }
         
-        .feature-list {
-            list-style: none;
-            columns: 2;
-            gap: 30px;
+        .debug-panel {
+            background: #1a1a2e;
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85em;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
         }
         
-        .feature-list li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
+        .debug-line {
+            color: #00ff00;
+            margin: 5px 0;
         }
         
-        .feature-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
+        .error {
+            color: #ff6b6b;
+        }
+        
+        .success {
             color: #4CAF50;
+        }
+        
+        .alert-box {
+            background: #FF6B6B;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
             font-weight: bold;
         }
         
-        footer {
+        .footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #e0e0e0;
-            color: #999;
-        }
-        
-        .console {
-            background: #1e1e1e;
-            color: #00ff00;
             padding: 20px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            overflow-x: auto;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
-        }
-        
-        .console-line {
-            margin: 5px 0;
+            color: #666;
+            border-top: 1px solid #444;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🚀 Aviator Modular</h1>
-            <p class="subtitle">Ferramenta Modularizada de Análise Inteligente</p>
+            <h1>🚀 Aviator Modular v17.0</h1>
+            <p class="subtitle">✅ VERSÃO 17 MODULARIZADA: Análise de Odds com 12 Módulos Profissionais</p>
         </header>
         
-        <div class="status">
-            <div class="status-title">✅ Status: 100% Modularizado e Online!</div>
-            <p>Seu projeto foi migrado com sucesso de um arquivo monolítico para 12 módulos independentes e profissionais.</p>
+        <div class="input-section">
+            <h2>📊 ENTRADA DE DADOS</h2>
+            <div class="input-group">
+                <label for="oddsInput">Cole dados brutos de odds (um por linha):</label>
+                <textarea id="oddsInput" rows="8" placeholder="1.5&#10;2.3&#10;5.8&#10;10.2&#10;1.9&#10;..."></textarea>
+            </div>
+            
+            <div class="range-inputs">
+                <div class="input-group">
+                    <label for="rangeMin">Range Menor (para análises atuais):</label>
+                    <input type="number" id="rangeMin" value="1.3" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="rangeMax">Range Maior (para análises futuras):</label>
+                    <input type="number" id="rangeMax" value="18.0" step="0.1">
+                </div>
+            </div>
+            
+            <button onclick="analisarDados()">🔍 Gerar Análise Completa</button>
+            <button onclick="limparDados()">🗑️ Limpar Tudo</button>
         </div>
         
-        <div class="stats">
-            <div class="stat-box">
-                <div class="stat-number">12</div>
-                <div class="stat-label">Arquivos JavaScript</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">5.645</div>
-                <div class="stat-label">Linhas de Código</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">87+</div>
-                <div class="stat-label">Funções Prontas</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Dependências</div>
-            </div>
-        </div>
-        
-        <h2 style="color: #667eea; margin: 30px 0 20px 0;">📦 Módulos Disponíveis</h2>
-        
-        <div class="modules-grid">
-            <div class="module-card">
-                <div class="module-title">💾 Storage</div>
-                <div class="module-desc">Persistência de dados com IndexedDB e LocalStorage. Suporta 20.000+ rodadas.</div>
+        <div class="grid-2">
+            <div class="card">
+                <h2>🎯 DETECTOR DE ODDS GIGANTES</h2>
+                <div class="detector">
+                    <div style="font-size: 0.9em; color: rgba(255,255,255,0.8);">Probabilidade</div>
+                    <div class="probability-value" id="giganteProbability">0%</div>
+                    <div style="font-size: 1.1em; margin: 15px 0;">Última Gigante: <strong id="ultimaGigante">-</strong></div>
+                    <div>Há quantos min: <strong id="tempoGigante">0</strong></div>
+                    <div style="margin-top: 15px;">Sequência atual: <strong id="sequenciaAtual">0</strong></div>
+                </div>
             </div>
             
-            <div class="module-card">
-                <div class="module-title">🔗 Broadcast</div>
-                <div class="module-desc">Comunicação em tempo real entre abas do navegador via BroadcastChannel API.</div>
-            </div>
-            
-            <div class="module-card">
-                <div class="module-title">📊 Statistics</div>
-                <div class="module-desc">10 funções de análise estatística. Distribuição, correlação, volatilidade.</div>
-            </div>
-            
-            <div class="module-card">
-                <div class="module-title">🎲 Probability</div>
-                <div class="module-desc">12 funções de cálculos probabilísticos com intervalo de confiança.</div>
-            </div>
-            
-            <div class="module-card">
-                <div class="module-title">📈 Martingale</div>
-                <div class="module-desc">11 funções para gestão de capital e progressão de apostas.</div>
-            </div>
-            
-            <div class="module-card">
-                <div class="module-title">🤖 AI Analysis</div>
-                <div class="module-desc">6 funções de análise com algoritmos de IA. Detecção de padrões e oportunidades.</div>
-            </div>
-            
-            <div class="module-card">
-                <div class="module-title">⏱️ Timing</div>
-                <div class="module-desc">11 funções de análise temporal. Periodicidade e distribuição por horário.</div>
-            </div>
-            
-            <div class="module-card">
-                <div class="module-title">📉 Moving Averages</div>
-                <div class="module-desc">12 funções de médias móveis, SMA, EMA e detecção de sinais.</div>
+            <div class="card">
+                <h2>📈 ESTATÍSTICAS BÁSICAS</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Total de Odds</div>
+                        <div class="stat-value" id="totalOdds">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Média</div>
+                        <div class="stat-value" id="mediaOdds">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Mínima</div>
+                        <div class="stat-value" id="minOdds">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Máxima</div>
+                        <div class="stat-value" id="maxOdds">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Mediana</div>
+                        <div class="stat-value" id="medianaOdds">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Desvio Padrão</div>
+                        <div class="stat-value" id="desvioOdds">0</div>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="features">
-            <h2>✨ Funcionalidades Principais</h2>
-            <ul class="feature-list">
-                <li>Storage com IndexedDB (sem servidor)</li>
-                <li>BroadcastChannel para sincronização</li>
-                <li>Análise estatística completa</li>
-                <li>Probabilidade com IC 95%</li>
-                <li>Sistema Martingale otimizado</li>
-                <li>Algoritmos de IA</li>
-                <li>Análise temporal avançada</li>
-                <li>Médias móveis e sinais</li>
-                <li>100% Python eliminado</li>
-                <li>0 dependências externas</li>
-                <li>Documentação JSDoc completa</li>
-                <li>Pronto para produção</li>
-            </ul>
+        <div class="card">
+            <h2>📊 DISTRIBUIÇÃO DE ODDS</h2>
+            <div id="distribuicao"></div>
         </div>
         
-        <div class="console">
-            <div class="console-line">> Status: ✅ Aviator Modular Online</div>
-            <div class="console-line">> Arquivos: 12 JavaScript modules</div>
-            <div class="console-line">> Funções: 87+ ready to use</div>
-            <div class="console-line">> Deploy: GitHub Pages ✓</div>
-            <div class="console-line">> Storage: IndexedDB ✓</div>
-            <div class="console-line">> Communication: BroadcastChannel ✓</div>
+        <div class="card">
+            <h2>🗺️ MAPA DE CALOR</h2>
+            <div class="heatmap" id="heatmap"></div>
         </div>
         
-        <footer>
-            <p>🎉 <strong>Projeto Aviator Modular</strong> - Versão 17.0</p>
-            <p>Migrado de monolítico para arquitetura profissional modular</p>
-            <p>Criado em: 24/10/2025 | GitHub: diogo110980-web/aviator-modular</p>
+        <div class="card">
+            <h2>📈 MÉDIAS MÓVEIS - SISTEMA DE ALERTAS</h2>
+            <table id="mediasTable">
+                <thead>
+                    <tr>
+                        <th>Média</th>
+                        <th>Valor Atual</th>
+                        <th>Categoria</th>
+                        <th>Chance Base</th>
+                        <th>Chance Atual</th>
+                        <th>Vantagem</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="mediasBody">
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>🧠 ANÁLISE DE IA</h2>
+            <div id="iaAnalise"></div>
+        </div>
+        
+        <div class="card">
+            <h2>🔍 DEBUG - CONSOLE</h2>
+            <div class="debug-panel" id="debugPanel"></div>
+        </div>
+        
+        <footer class="footer">
+            <p>🎉 <strong>Aviator Modular v17.0</strong></p>
+            <p>12 Módulos | 5.645 linhas | 87+ Funções | 0 Dependências</p>
+            <p>Arquitetura Profissional Modular</p>
         </footer>
     </div>
+    
+    <!-- Importar módulos -->
+    <script type="module">
+        import CONFIG from './js/config.js';
+        import Statistics from './js/modules/statistics.js';
+        import Probability from './js/modules/probability.js';
+        import Martingale from './js/modules/martingale.js';
+        import AIAnalysis from './js/modules/ai-analysis.js';
+        import Timing from './js/modules/timing.js';
+        import MovingAverages from './js/modules/moving-averages.js';
+        
+        window.modules = {
+            CONFIG,
+            Statistics,
+            Probability,
+            Martingale,
+            AIAnalysis,
+            Timing,
+            MovingAverages
+        };
+        
+        window.analisarDados = analisarDados;
+        window.limparDados = limparDados;
+        
+        function log(msg, type = 'info') {
+            const panel = document.getElementById('debugPanel');
+            const line = document.createElement('div');
+            line.className = `debug-line ${type}`;
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            panel.appendChild(line);
+            panel.scrollTop = panel.scrollHeight;
+        }
+        
+        function analisarDados() {
+            try {
+                const oddsText = document.getElementById('oddsInput').value;
+                const rangeMin = parseFloat(document.getElementById('rangeMin').value);
+                const rangeMax = parseFloat(document.getElementById('rangeMax').value);
+                
+                log('Iniciando análise...', 'info');
+                
+                if (!oddsText.trim()) {
+                    log('Erro: Cole os dados primeiro!', 'error');
+                    alert('❌ Cole dados na textarea!');
+                    return;
+                }
+                
+                // Parser de dados
+                const odds = oddsText
+                    .split('\n')
+                    .map(line => {
+                        const num = parseFloat(line.trim().replace('x', ''));
+                        return isNaN(num) ? null : num;
+                    })
+                    .filter(x => x !== null && x >= CONFIG.odds.rangeMin && x <= CONFIG.odds.rangeMax);
+                
+                log(`✓ ${odds.length} odds processadas`, 'success');
+                
+                if (odds.length < 10) {
+                    log('⚠️ Mínimo 10 odds para análise completa', 'error');
+                }
+                
+                // ============ STATISTICS ============
+                const stats = Statistics.analisarDistribuicaoCorrigida_v3(odds, {
+                    rangeMenor: rangeMin,
+                    rangeMaior: rangeMax
+                });
+                
+                // Atualizar stats básicas
+                document.getElementById('totalOdds').textContent = odds.length;
+                document.getElementById('mediaOdds').textContent = stats.media.toFixed(2);
+                document.getElementById('minOdds').textContent = stats.minimo.toFixed(2);
+                document.getElementById('maxOdds').textContent = stats.maximo.toFixed(2);
+                document.getElementById('medianaOdds').textContent = stats.mediana.toFixed(2);
+                document.getElementById('desvioOdds').textContent = stats.desvio_padrao.toFixed(2);
+                
+                log(`Media: ${stats.media.toFixed(2)}, Desvio: ${stats.desvio_padrao.toFixed(2)}`, 'success');
+                
+                // ============ DISTRIBUIÇÃO ============
+                let distHtml = '<table><tr><th>Range</th><th>Contagem</th><th>%</th><th>Visual</th></tr>';
+                Object.entries(stats.distribuicao).forEach(([range, data]) => {
+                    distHtml += `<tr>
+                        <td>${range}</td>
+                        <td>${data.count}</td>
+                        <td>${data.percent.toFixed(1)}%</td>
+                        <td>${data.visual}</td>
+                    </tr>`;
+                });
+                distHtml += '</table>';
+                document.getElementById('distribuicao').innerHTML = distHtml;
+                
+                // ============ HEATMAP ============
+                const heatmap = document.getElementById('heatmap');
+                heatmap.innerHTML = '';
+                const sorted = [...odds].sort((a, b) => a - b);
+                const step = Math.ceil(odds.length / 20);
+                
+                for (let i = 0; i < sorted.length; i += step) {
+                    const cell = document.createElement('div');
+                    cell.className = 'heatmap-cell';
+                    const val = sorted[i];
+                    
+                    if (val >= 10) cell.classList.add('extreme');
+                    else if (val >= 5) cell.classList.add('hot');
+                    else if (val >= 2) cell.classList.add('neutral');
+                    else cell.classList.add('cold');
+                    
+                    cell.textContent = val.toFixed(1);
+                    heatmap.appendChild(cell);
+                }
+                
+                // ============ PROBABILITY ============
+                const gigantes10 = Probability.calcularProbabilidadeReal(odds, 10);
+                document.getElementById('giganteProbability').textContent = 
+                    `${gigantes10.probabilidade_suavizada.toFixed(1)}%`;
+                
+                log(`Gigantes (10x+): ${gigantes10.probabilidade_suavizada.toFixed(2)}%`, 'success');
+                
+                // ============ MOVING AVERAGES ============
+                const medias = MovingAverages.calcularMediasMoveis(odds);
+                let mediasHtml = '';
+                medias.alertas.forEach(alerta => {
+                    const status = alerta.intensidade === 'alta' ? 'status-high' : 
+                                   alerta.percentual > 0 ? 'status-medium' : 'status-low';
+                    mediasHtml += `<tr>
+                        <td>SMA${alerta.periodo}</td>
+                        <td>${medias.preco_atual.toFixed(2)}</td>
+                        <td>Odds ≥${alerta.periodo}x</td>
+                        <td>26.7%</td>
+                        <td>${Math.abs(alerta.percentual).toFixed(1)}%</td>
+                        <td>${alerta.percentual.toFixed(2)}%</td>
+                        <td><span class="status-badge ${status}">
+                            ${alerta.percentual > 0 ? '📈' : '📉'} ${alerta.intensidade}
+                        </span></td>
+                    </tr>`;
+                });
+                document.getElementById('mediasBody').innerHTML = mediasHtml;
+                
+                if (medias.alertas.length > 0) {
+                    log(`🚨 ${medias.alertas.length} alertas de vantagem detectados!`, 'success');
+                }
+                
+                // ============ IA ANALYSIS ============
+                const ia = AIAnalysis.gerarRelatorioCompleto(odds);
+                let iaHtml = `
+                    <div>
+                        <p><strong>Score Geral:</strong> ${ia.score_geral.toFixed(2)}/100</p>
+                        <p><strong>Consistência:</strong> ${ia.analise_consistencia.nivel_consistencia}</p>
+                        <p><strong>Oportunidades:</strong> ${ia.analise_janelas.oportunidades_detectadas}</p>
+                        <p><strong>Recomendação:</strong> ${ia.recomendacao_geral}</p>
+                    </div>
+                `;
+                document.getElementById('iaAnalise').innerHTML = iaHtml;
+                
+                log('✅ Análise completa!', 'success');
+                
+            } catch (error) {
+                log(`❌ Erro: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+        
+        function limparDados() {
+            document.getElementById('oddsInput').value = '';
+            document.getElementById('debugPanel').innerHTML = '';
+            document.getElementById('heatmap').innerHTML = '';
+            document.getElementById('mediasBody').innerHTML = '';
+            document.getElementById('iaAnalise').innerHTML = '';
+            log('Dados limpos', 'info');
+        }
+        
+        log('🚀 Aviator Modular v17.0 pronto!', 'success');
+    </script>
 </body>
 </html>
